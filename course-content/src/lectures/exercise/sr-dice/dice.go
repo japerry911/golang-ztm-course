@@ -23,7 +23,41 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
+
+func roll(sides int) int {
+	return rand.Intn(sides) + 1
+}
 
 func main() {
+	rand.Seed(time.Now().UnixNano())
+
+	dice, sides, rolls := 2, 12, 1
+
+	for r := 1; r <= rolls; r++ {
+		sum := 0
+
+		for d := 1; d <= dice; d++ {
+			rolled := roll(sides)
+			sum += rolled
+			fmt.Println("Rolls #", r, ", Die #", d, ":", rolled)
+		}
+
+		fmt.Println("Total Rolled:", sum)
+
+		switch sum := sum; {
+		case sum == 2 && dice == 2:
+			fmt.Println("snake eyes")
+		case sum == 7:
+			fmt.Println("lucky 7")
+		case sum%2 == 0:
+			fmt.Println("even")
+		case sum%2 == 1:
+			fmt.Println("odd")
+		}
+	}
 }
