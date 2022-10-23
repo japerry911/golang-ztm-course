@@ -18,6 +18,28 @@ package main
 
 import "fmt"
 
-func main() {
+type Product struct {
+	name  string
+	price int
+}
 
+func main() {
+	products := [4]Product{
+		{name: "xbox", price: 350},
+		{name: "ps4", price: 500},
+		{name: "gamecube", price: 175},
+	}
+
+	fmt.Println(products[2])
+	fmt.Println(len(products))
+
+	totalCost := 0
+	for i := 0; i < len(products); i++ {
+		product := products[i]
+		totalCost += product.price
+	}
+	fmt.Println(totalCost)
+
+	products[3] = Product{name: "computer", price: 2000}
+	fmt.Println(products[3])
 }
